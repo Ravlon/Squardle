@@ -12,15 +12,20 @@ def init_LOG():
     PATH = pathlib.Path(__file__).parent.absolute()
     LOG_PATH = PATH.joinpath("Squaredle.log")
 
-    #log_file init
-    logger.new_time_rotator(LOG_PATH)
-    SB.logger.new_time_rotator(LOG_PATH)
-    SS.logger.new_time_rotator(LOG_PATH)
-    BP.logger.new_time_rotator(LOG_PATH)
-    CH.logger.new_time_rotator(LOG_PATH)
+    loggers = [logger,SB.logger,SS.logger,BP.logger,CH.logger]
 
-    #telegram log init
-    ...
+    #log_file init
+    for l in loggers:
+        #log_file init
+        l.new_time_rotator(LOG_PATH)
+
+    credentials = CH.getcredentials("TELEGRAM")
+
+    for l in loggers:
+        #telegram log init
+        l.telegram_bot(credentials["token"],credentials["chatID"])
+    
+    logger.critical("Log initialised")
 
 def main(solution:list, bonus, invalid):
     #set up of driver
