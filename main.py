@@ -24,10 +24,10 @@ def init_LOG():
 
 def main(solution:list, bonus, invalid):
     #set up of driver
-    # credentials = CH.getcredentials("SQUAREDLE")
-    driver = SB.setup()
+    credentials = CH.getcredentials("SQUAREDLE")
+    driver = SB.setup(_headless = False)
     SB.cookies(driver)
-    SB.signin(driver)
+    SB.signin(driver,credentials)
 
     #quick solution
     SB.attempt(driver= driver, words= solution, bonus_word= bonus, invalid_words =invalid)

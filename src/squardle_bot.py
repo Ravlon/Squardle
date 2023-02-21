@@ -125,18 +125,20 @@ def old_signin(driver, credentials):
     
     #switch back to default frame
     default(driver)
-def signin(driver):#make it more stable
+def signin(driver,credentials):#make it more stable
     #set necessary info in Local Storage for signin
     inst = LS(driver)
-    inst.set("squaredle-email","email")
-    inst.set("squaredle-name","name")
-    inst.set("squaredle-userId","userId")
-    inst.set("squaredle-uuid","uuid")
+    inst.set("squaredle-email",credentials["email"])
+    inst.set("squaredle-name",credentials["username"])
+    inst.set("squaredle-userId",credentials["userId"])
+    inst.set("squaredle-uuid",credentials["uuid"])
 
     #refresh page
     driver.refresh()
 
-def popup_mgr(driver,pop_ups):
+def popup_mgr(driver,pop_ups = []):
+    if not(pop_ups):
+        pop_ups = driver.find_elements(By.CLASS_NAME,"popup")
     for e in pop_ups:
         if e.is_displayed():
             name = e.get_dom_attribute("id")
@@ -168,4 +170,5 @@ def attempt(driver, words, bonus_word, invalid_words):
 #     ...
 
 def getTime(driver):
+    popup_mgr(driver)
     return driver.find_element(By.ID,"timer").text

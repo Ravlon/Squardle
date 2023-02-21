@@ -127,7 +127,7 @@ def getcredentials(service:str):
             try:
                 return json.load(f)
             except:
-                logger.error("Crendials not available", exc_info=True)
+                logger.error("Credentials not available", exc_info=True)
                 return 0
     else:
         #raise Error
