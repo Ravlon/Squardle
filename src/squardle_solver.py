@@ -41,7 +41,7 @@ def make_matrix(board:list):
         Matrix of list: matrix with a list of the content of the cell and the possible neighbours 
     """
     board_matrix =  [list(row) for row in board]
-    shape = (len(board_matrix[0]),len(board_matrix))
+    shape = (len(board_matrix),len(board_matrix[0]))
     result = [[(" ",[]) for c in range(shape[1])] for r in range(shape[0])]
     try:
         for r in range(shape[0]):
