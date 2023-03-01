@@ -172,3 +172,6 @@ def attempt(driver, words, bonus_word, invalid_words):
 def getTime(driver):
     popup_mgr(driver)
     return driver.find_element(By.ID,"timer").text
+
+def max_word(driver):
+    return driver.find_element(By.ID,"maxWordCount").text
